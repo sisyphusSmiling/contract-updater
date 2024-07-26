@@ -156,6 +156,15 @@ access(all) contract MigrationContractStaging {
         return self.getStagedContractUpdate(address: address, name: name)?.code
     }
 
+    /// Returns the staged contract code hash for the given address and name or nil if it's not staged
+    ///
+    access(all) view fun getStagedContractCodeHash(address: Address, name: String): String? {
+        if let update = self.getStagedContractUpdate(address: address, name: name) {
+            return self.getCodeHash(update.code)
+        }
+        return nil
+    }
+
     /// Returns the ContractUpdate struct for the given contract if it's been staged.
     ///
     access(all) view fun getStagedContractUpdate(address: Address, name: String): ContractUpdate? {
@@ -205,6 +214,14 @@ access(all) contract MigrationContractStaging {
             .concat(contractName)
         return StoragePath(identifier: identifier)
             ?? panic("Could not derive Capsule StoragePath for given address")
+    }
+
+    /* --- Util --- */
+
+    /// Returns the hash of the given code, hashing with SHA3-256
+    ///
+    access(all) fun getCodeHash(_ code: String): String {
+        return String.encodeHex(HashAlgorithm.SHA3_256.hash(code.utf8))
     }
 
     /* ------------------------------------------------------------------------------------------------------------ */
@@ -352,7 +369,7 @@ access(all) contract MigrationContractStaging {
             emit StagingStatusUpdated(
                 capsuleUUID: self.uuid,
                 address: self.update.address,
-                code: code,
+                code: MigrationContractStaging.getCodeHash(code),
                 contract: self.update.name,
                 action: "replace"
             )
@@ -406,7 +423,7 @@ access(all) contract MigrationContractStaging {
         emit StagingStatusUpdated(
             capsuleUUID: capsule.uuid,
             address: host.address(),
-            code: code,
+            code: MigrationContractStaging.getCodeHash(code),
             contract: name,
             action: "stage"
         )

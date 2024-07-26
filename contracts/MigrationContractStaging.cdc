@@ -32,7 +32,7 @@ access(all) contract MigrationContractStaging {
     access(all) event StagingStatusUpdated(
         capsuleUUID: UInt64,
         address: Address,
-        code: String,
+        codeHash: [UInt8],
         contractIdentifier: String,
         action: String
     )
@@ -112,7 +112,7 @@ access(all) contract MigrationContractStaging {
         emit StagingStatusUpdated(
             capsuleUUID: capsuleUUID,
             address: address,
-            code: "",
+            codeHash: [],
             contractIdentifier: name,
             action: "unstage"
         )
@@ -154,6 +154,15 @@ access(all) contract MigrationContractStaging {
     ///
     access(all) view fun getStagedContractCode(address: Address, name: String): String? {
         return self.getStagedContractUpdate(address: address, name: name)?.code
+    }
+
+    /// Returns the staged contract code hash for the given address and name or nil if it's not staged
+    ///
+    access(all) view fun getStagedContractCodeHash(address: Address, name: String): [UInt8]? {
+        if let update = self.getStagedContractUpdate(address: address, name: name) {
+            return self.getCodeHash(update.code)
+        }
+        return nil
     }
 
     /// Returns the ContractUpdate struct for the given contract if it's been staged.
@@ -205,6 +214,14 @@ access(all) contract MigrationContractStaging {
             .concat(contractName)
         return StoragePath(identifier: identifier)
             ?? panic("Could not derive Capsule StoragePath for given address")
+    }
+
+    /* --- Util --- */
+
+    /// Returns the hash of the given code, hashing with SHA3-256
+    ///
+    access(all) view fun getCodeHash(_ code: String): [UInt8] {
+        return HashAlgorithm.SHA3_256.hash(code.utf8)
     }
 
     /* ------------------------------------------------------------------------------------------------------------ */
@@ -352,7 +369,7 @@ access(all) contract MigrationContractStaging {
             emit StagingStatusUpdated(
                 capsuleUUID: self.uuid,
                 address: self.update.address,
-                code: code,
+                codeHash: MigrationContractStaging.getCodeHash(code),
                 contractIdentifier: self.update.name,
                 action: "replace"
             )
@@ -406,7 +423,7 @@ access(all) contract MigrationContractStaging {
         emit StagingStatusUpdated(
             capsuleUUID: capsule.uuid,
             address: host.address(),
-            code: code,
+            codeHash: MigrationContractStaging.getCodeHash(code),
             contractIdentifier: name,
             action: "stage"
         )

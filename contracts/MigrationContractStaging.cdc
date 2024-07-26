@@ -32,7 +32,7 @@ access(all) contract MigrationContractStaging {
     access(all) event StagingStatusUpdated(
         capsuleUUID: UInt64,
         address: Address,
-        code: String,
+        codeHash: [UInt8],
         contract: String,
         action: String
     )
@@ -112,7 +112,7 @@ access(all) contract MigrationContractStaging {
         emit StagingStatusUpdated(
             capsuleUUID: capsuleUUID,
             address: address,
-            code: "",
+            codeHash: [],
             contract: name,
             action: "unstage"
         )
@@ -158,7 +158,7 @@ access(all) contract MigrationContractStaging {
 
     /// Returns the staged contract code hash for the given address and name or nil if it's not staged
     ///
-    access(all) view fun getStagedContractCodeHash(address: Address, name: String): String? {
+    access(all) view fun getStagedContractCodeHash(address: Address, name: String): [UInt8]? {
         if let update = self.getStagedContractUpdate(address: address, name: name) {
             return self.getCodeHash(update.code)
         }
@@ -220,8 +220,8 @@ access(all) contract MigrationContractStaging {
 
     /// Returns the hash of the given code, hashing with SHA3-256
     ///
-    access(all) fun getCodeHash(_ code: String): String {
-        return String.encodeHex(HashAlgorithm.SHA3_256.hash(code.utf8))
+    access(all) fun getCodeHash(_ code: String): [UInt8] {
+        return HashAlgorithm.SHA3_256.hash(code.utf8)
     }
 
     /* ------------------------------------------------------------------------------------------------------------ */
@@ -369,7 +369,7 @@ access(all) contract MigrationContractStaging {
             emit StagingStatusUpdated(
                 capsuleUUID: self.uuid,
                 address: self.update.address,
-                code: MigrationContractStaging.getCodeHash(code),
+                codeHash: MigrationContractStaging.getCodeHash(code),
                 contract: self.update.name,
                 action: "replace"
             )
@@ -423,7 +423,7 @@ access(all) contract MigrationContractStaging {
         emit StagingStatusUpdated(
             capsuleUUID: capsule.uuid,
             address: host.address(),
-            code: MigrationContractStaging.getCodeHash(code),
+            codeHash: MigrationContractStaging.getCodeHash(code),
             contract: name,
             action: "stage"
         )

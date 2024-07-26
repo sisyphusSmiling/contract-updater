@@ -9,6 +9,6 @@ import "MigrationContractStaging"
 
 /// Returns the code hash as it is staged or nil if it not currently staged.
 ///
-access(all) fun main(contractAddress: Address, contractName: String): String? {
+access(all) fun main(contractAddress: Address, contractName: String): [UInt8]? {
     return MigrationContractStaging.getStagedContractCodeHash(address: contractAddress, name: contractName)
 }

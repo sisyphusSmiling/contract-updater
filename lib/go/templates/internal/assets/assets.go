@@ -8,6 +8,7 @@
 // scripts/migration-contract-staging/get_all_staged_contract_hosts.cdc (455B)
 // scripts/migration-contract-staging/get_all_staged_contracts.cdc (406B)
 // scripts/migration-contract-staging/get_staged_contract_code.cdc (520B)
+// scripts/migration-contract-staging/get_staged_contract_code_hash.cdc (530B)
 // scripts/migration-contract-staging/get_staged_contract_names_for_address.cdc (469B)
 // scripts/migration-contract-staging/get_staged_contract_update.cdc (686B)
 // scripts/migration-contract-staging/get_staging_cutoff.cdc (422B)
@@ -273,6 +274,26 @@ func scriptsMigrationContractStagingGet_staged_contract_codeCdc() (*asset, error
 
 	info := bindataFileInfo{name: "scripts/migration-contract-staging/get_staged_contract_code.cdc", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x23, 0xbe, 0x90, 0x8d, 0xa6, 0x27, 0x4b, 0x65, 0x78, 0xfb, 0x7c, 0x65, 0x4a, 0x59, 0x1a, 0x23, 0xaf, 0xad, 0x28, 0x4a, 0xaf, 0xe7, 0x8b, 0xb8, 0xbb, 0xed, 0xf, 0x12, 0x76, 0x75, 0x17, 0x3c}}
+	return a, nil
+}
+
+var _scriptsMigrationContractStagingGet_staged_contract_code_hashCdc = "\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x74\x91\xb1\x8a\xdb\x40\x10\x86\xfb\x7d\x8a\x1f\xa5\x91\x40\x91\xe3\x2e\xa8\x09\xc1\x45\x92\x22\x29\x62\x5c\x1d\x57\xcc\xad\xc6\xab\x01\x79\xd6\xec\x8e\x0c\xe6\xb8\x77\x3f\x24\x4b\x87\xef\xe0\xba\x65\x76\xe6\xff\xbe\x9d\x95\xd3\x39\x26\x43\xf1\x57\x42\x22\x93\xa8\xbb\xa8\x96\xc8\xdb\xde\x28\x88\x86\xc2\xb9\x2f\xa2\xc6\x53\x49\xa2\xa2\x74\x00\x70\xe1\x94\x25\x6a\x8b\x62\xdb\x6c\x9b\x6f\x45\x3d\x57\x4d\x6c\xe0\x16\xc5\x2f\x36\x4c\xe3\xdc\x61\x4d\xc3\x2e\x76\xbc\xb4\x75\x9c\x7d\x92\xb3\xdd\x02\xfe\xb3\x8d\x49\x33\xac\x67\xec\xa8\x63\xf5\x0c\x1f\x3b\x86\xf5\x64\xe8\x29\xe3\x89\x59\x91\x6f\x79\xc7\x98\xe6\xce\x20\x17\x56\xf8\x35\x3d\x26\xa8\x0c\x90\x23\xc4\x20\x19\x1a\x0d\x57\xb6\x65\xaa\x59\xc0\x03\x69\x18\x29\x4c\x8a\xac\x5f\x0f\xfb\xa2\x76\x95\x73\x9b\xcd\x06\xf7\x12\x33\xbc\xa7\xdc\x83\xf2\x12\xb7\xc0\xdf\x51\x26\x84\x1f\x53\x62\xb5\xe1\xba\x82\xa6\x30\x47\xde\x73\xce\x25\x0d\x43\x85\xe3\xa8\x38\x91\x68\xb9\xaa\xfe\xec\xba\xc4\x39\xb7\x58\x0e\xf5\xdb\x23\xfe\xd1\x89\x5b\xec\x2d\x89\x86\xaa\xc5\xc3\xe1\x8f\xda\xf7\xc7\x1f\x78\x9e\xdd\xd3\x6c\x88\xcf\xbe\xa9\x09\x6c\xb7\x95\xaf\x17\xd3\xc2\x7f\x53\xee\x4b\x5a\x89\x1f\x14\x6a\xe8\x4c\xbc\xe7\x57\xee\xc5\xbd\x06\x00\x00\xff\xff\x7d\xa7\xf9\x92\x12\x02\x00\x00"
+
+func scriptsMigrationContractStagingGet_staged_contract_code_hashCdcBytes() ([]byte, error) {
+	return bindataRead(
+		_scriptsMigrationContractStagingGet_staged_contract_code_hashCdc,
+		"scripts/migration-contract-staging/get_staged_contract_code_hash.cdc",
+	)
+}
+
+func scriptsMigrationContractStagingGet_staged_contract_code_hashCdc() (*asset, error) {
+	bytes, err := scriptsMigrationContractStagingGet_staged_contract_code_hashCdcBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "scripts/migration-contract-staging/get_staged_contract_code_hash.cdc", size: 0, mode: os.FileMode(0), modTime: time.Unix(0, 0)}
+	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x1e, 0x42, 0xfb, 0xb3, 0x68, 0xa6, 0xb3, 0x5e, 0xef, 0x5f, 0xf8, 0x60, 0x95, 0x4c, 0x53, 0xf8, 0x10, 0x3a, 0xd2, 0x47, 0xb4, 0x75, 0xca, 0x55, 0x77, 0x10, 0x9d, 0x83, 0xe, 0xc1, 0x7e, 0x90}}
 	return a, nil
 }
 
@@ -1155,6 +1176,7 @@ var _bindata = map[string]func() (*asset, error){
 	"scripts/migration-contract-staging/get_all_staged_contract_hosts.cdc":            scriptsMigrationContractStagingGet_all_staged_contract_hostsCdc,
 	"scripts/migration-contract-staging/get_all_staged_contracts.cdc":                 scriptsMigrationContractStagingGet_all_staged_contractsCdc,
 	"scripts/migration-contract-staging/get_staged_contract_code.cdc":                 scriptsMigrationContractStagingGet_staged_contract_codeCdc,
+	"scripts/migration-contract-staging/get_staged_contract_code_hash.cdc":            scriptsMigrationContractStagingGet_staged_contract_code_hashCdc,
 	"scripts/migration-contract-staging/get_staged_contract_names_for_address.cdc":    scriptsMigrationContractStagingGet_staged_contract_names_for_addressCdc,
 	"scripts/migration-contract-staging/get_staged_contract_update.cdc":               scriptsMigrationContractStagingGet_staged_contract_updateCdc,
 	"scripts/migration-contract-staging/get_staging_cutoff.cdc":                       scriptsMigrationContractStagingGet_staging_cutoffCdc,
@@ -1254,6 +1276,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			"get_all_staged_contract_hosts.cdc": {scriptsMigrationContractStagingGet_all_staged_contract_hostsCdc, map[string]*bintree{}},
 			"get_all_staged_contracts.cdc": {scriptsMigrationContractStagingGet_all_staged_contractsCdc, map[string]*bintree{}},
 			"get_staged_contract_code.cdc": {scriptsMigrationContractStagingGet_staged_contract_codeCdc, map[string]*bintree{}},
+			"get_staged_contract_code_hash.cdc": {scriptsMigrationContractStagingGet_staged_contract_code_hashCdc, map[string]*bintree{}},
 			"get_staged_contract_names_for_address.cdc": {scriptsMigrationContractStagingGet_staged_contract_names_for_addressCdc, map[string]*bintree{}},
 			"get_staged_contract_update.cdc": {scriptsMigrationContractStagingGet_staged_contract_updateCdc, map[string]*bintree{}},
 			"get_staging_cutoff.cdc": {scriptsMigrationContractStagingGet_staging_cutoffCdc, map[string]*bintree{}},
